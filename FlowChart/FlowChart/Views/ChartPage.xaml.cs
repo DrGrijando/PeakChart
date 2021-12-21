@@ -1,17 +1,18 @@
-﻿using Microcharts;
+﻿using FlowChart.ViewModels;
+using Microcharts;
 using SkiaSharp;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FlowChart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChartPage : ContentPage
+    public partial class ChartPage
     {
         public ChartPage()
         {
             InitializeComponent();
+            BindingContext = new ChartViewModel();
 
             chart.Chart = new LineChart() 
             {

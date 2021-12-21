@@ -3,7 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
              x:Class="FlowChart.Views.ChartPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddValueCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <charts:ChartView x:Name="chart" 
                       HeightRequest="200"
                       VerticalOptions="Center" />
+    
 </ContentPage>

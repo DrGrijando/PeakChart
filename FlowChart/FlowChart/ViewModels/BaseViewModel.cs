@@ -1,25 +1,23 @@
-﻿using FlowChart.Models;
-using FlowChart.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace FlowChart.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        private bool isBusy = false;
+        private string title = string.Empty;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        bool isBusy = false;
         public bool IsBusy
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
-
-        string title = string.Empty;
+        
         public string Title
         {
             get { return title; }
@@ -38,9 +36,7 @@ namespace FlowChart.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+                
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -49,6 +45,5 @@ namespace FlowChart.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }
