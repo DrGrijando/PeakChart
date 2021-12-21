@@ -1,12 +1,10 @@
-﻿using FlowChart.ViewModels;
-using FlowChart.Views;
+﻿using FlowChart.Views;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace FlowChart
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {
@@ -17,7 +15,8 @@ namespace FlowChart
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            //await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.Navigation.PushAsync(new NewItemPage());
         }
     }
 }
