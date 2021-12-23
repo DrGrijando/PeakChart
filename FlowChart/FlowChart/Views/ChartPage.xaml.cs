@@ -1,6 +1,7 @@
 ﻿using FlowChart.ViewModels;
 using Microcharts;
 using SkiaSharp;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,14 +10,17 @@ namespace FlowChart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartPage
     {
+        private readonly ChartViewModel vm;
+
         public ChartPage()
         {
             InitializeComponent();
             BindingContext = new ChartViewModel();
+            vm = BindingContext as ChartViewModel;
 
-            ChartEntry[] entries = PopulateChart();
+            vm.Entries.CollectionChanged += Entries_CollectionChanged;
 
-            chart.WidthRequest = entries.Length * 16;
+            chart.WidthRequest = vm.Entries.Count * 16;
             chart.Chart = new LineChart() 
             {
                 MinValue = 500,
@@ -28,36 +32,24 @@ namespace FlowChart.Views
                 LabelOrientation = Orientation.Horizontal,
                 LabelTextSize = 30,
                 ValueLabelOrientation = Orientation.Horizontal,
-                Entries = entries
+                Entries = vm.Entries
             };
         }
 
-        private ChartEntry[] PopulateChart() 
+        ~ChartPage() 
         {
-            return new ChartEntry[]
-            {
-                AddChartEntry(700, "#FFD200", "Jan"),
-                AddChartEntry(720, "#FABADA", "Feb"),
-                AddChartEntry(690, "#FFD200", "Mar"),
-                AddChartEntry(700, "#FABADA", "Apr"),
-                AddChartEntry(700, "#FFD200", "May"),
-                AddChartEntry(710, "#FABADA", "Jun"),
-                AddChartEntry(720, "#FFD200", "Jul"),
-                AddChartEntry(710, "#FABADA", "Aug")
-            };
+            vm.Entries.CollectionChanged -= Entries_CollectionChanged;
         }
 
-        private ChartEntry AddChartEntry(float value, string color, string label = null)
+        protected override void OnAppearing()
         {
-            ChartEntry entry = new ChartEntry(value) { Color = SKColor.Parse(color) };
+            base.OnAppearing();
+            chart.Chart.IsAnimated = false;
+        }
 
-            if (!string.IsNullOrEmpty(label))
-            {
-                entry.Label = label;
-                entry.ValueLabel = value.ToString();
-            }
-
-            return entry;
+        private void Entries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            chart.Chart.Entries = vm.Entries;
         }
     }
 }

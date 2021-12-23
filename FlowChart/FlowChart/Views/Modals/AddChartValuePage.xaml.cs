@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using FlowChart.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace FlowChart.Views.Modals
@@ -15,6 +9,7 @@ namespace FlowChart.Views.Modals
         public AddChartValuePage()
         {
             InitializeComponent();
+            BindingContext = new AddChartValueViewModel();
         }
     }
 }

@@ -1,12 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FlowChart.Views.Modals.AddChartValuePage">
+             x:Class="FlowChart.Views.Modals.AddChartValuePage"
+             Title="Add new value">
     
-    <StackLayout>
-        <Label Text="Welcome to Xamarin.Forms!"
-               VerticalOptions="CenterAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
+    <StackLayout Spacing="16"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        <Label Text="Value" />
+        <Entry Keyboard="Numeric" 
+               Text="{Binding Value}" />
+
+        <Label Text="Day" />
+        <DatePicker Date="{Binding Date}" />
+
+        <Label Text="Period" />
+        <Switch IsToggled="{Binding IsNightPeriod}" />
+
+        <Button Text="Save"
+                Command="{Binding SaveValueCommand}" />
     </StackLayout>
     
 </ContentPage>
