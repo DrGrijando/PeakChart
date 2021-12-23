@@ -7,9 +7,11 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddValueCommand}" />
     </ContentPage.ToolbarItems>
-    
-    <charts:ChartView x:Name="chart" 
-                      HeightRequest="200"
-                      VerticalOptions="Center" />
-    
+
+    <ScrollView Orientation="Horizontal"
+                HeightRequest="300"
+                VerticalOptions="Center">
+        <charts:ChartView x:Name="chart" />
+    </ScrollView>
+
 </ContentPage>

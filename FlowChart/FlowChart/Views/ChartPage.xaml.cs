@@ -14,6 +14,9 @@ namespace FlowChart.Views
             InitializeComponent();
             BindingContext = new ChartViewModel();
 
+            ChartEntry[] entries = PopulateChart();
+
+            chart.WidthRequest = entries.Length * 16;
             chart.Chart = new LineChart() 
             {
                 MinValue = 500,
@@ -22,7 +25,10 @@ namespace FlowChart.Views
                 LineSize = 10,
                 LineMode = LineMode.Straight,
                 EnableYFadeOutGradient = true,
-                Entries = PopulateChart()
+                LabelOrientation = Orientation.Horizontal,
+                LabelTextSize = 30,
+                ValueLabelOrientation = Orientation.Horizontal,
+                Entries = entries
             };
         }
 
@@ -37,7 +43,7 @@ namespace FlowChart.Views
                 AddChartEntry(700, "#FFD200", "May"),
                 AddChartEntry(710, "#FABADA", "Jun"),
                 AddChartEntry(720, "#FFD200", "Jul"),
-                AddChartEntry(710, "#FABADA", "Aug"),
+                AddChartEntry(710, "#FABADA", "Aug")
             };
         }
 
