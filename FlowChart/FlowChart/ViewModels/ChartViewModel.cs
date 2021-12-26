@@ -1,4 +1,5 @@
 ﻿using FlowChart.Constants;
+using FlowChart.Database.Models;
 using FlowChart.Models;
 using FlowChart.Views.Modals;
 using Microcharts;
@@ -38,49 +39,49 @@ namespace FlowChart.ViewModels
         {
             return new ObservableCollection<ChartEntry>
             {
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 700,
                     IsNightPeriod = false,
                     Date = new System.DateTime(2021, 1, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 720,
                     IsNightPeriod = true,
                     Date = new System.DateTime(2021, 2, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 690,
                     IsNightPeriod = false,
                     Date = new System.DateTime(2021, 3, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 700,
                     IsNightPeriod = true,
                     Date = new System.DateTime(2021, 4, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 710,
                     IsNightPeriod = true,
                     Date = new System.DateTime(2021, 5, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 700,
                     IsNightPeriod = true,
                     Date = new System.DateTime(2021, 6, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 720,
                     IsNightPeriod = false,
                     Date = new System.DateTime(2021, 7, 1)
                 }),
-                AddChartEntry(new FlowReading()
+                AddChartEntry(new Reading()
                 {
                     Value = 710, 
                     IsNightPeriod = true, 
@@ -91,16 +92,16 @@ namespace FlowChart.ViewModels
 
         private async Task AddValueCommandExecute()
         {
-            MessagingCenter.Subscribe<AddChartValueViewModel, FlowReading>(this, MessagingKeys.AddValue, (vm, reading) => 
+            MessagingCenter.Subscribe<AddChartValueViewModel, Reading>(this, MessagingKeys.AddValue, (vm, reading) => 
             {
-                MessagingCenter.Unsubscribe<AddChartValueViewModel, FlowReading>(this, MessagingKeys.AddValue);
+                MessagingCenter.Unsubscribe<AddChartValueViewModel, Reading>(this, MessagingKeys.AddValue);
                 Entries.Add(AddChartEntry(reading));
             });
 
             await Shell.Current.Navigation.PushModalAsync(new AddChartValuePage());
         }
 
-        private ChartEntry AddChartEntry(FlowReading reading)
+        private ChartEntry AddChartEntry(Reading reading)
         {
             ChartEntry entry = new ChartEntry(reading.Value) 
             {
@@ -109,7 +110,6 @@ namespace FlowChart.ViewModels
             entry.ValueLabel = reading.Value.ToString();
             entry.Label = reading.Date.ToString("dd/MM");
             
-
             return entry;
         }
     }

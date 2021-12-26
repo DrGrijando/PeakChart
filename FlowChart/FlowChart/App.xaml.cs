@@ -1,8 +1,6 @@
-﻿using FlowChart.Services;
-using FlowChart.Views;
-using System;
+﻿using FlowChart.Database.Services;
+using FlowChart.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace FlowChart
 {
@@ -13,6 +11,7 @@ namespace FlowChart
         {
             InitializeComponent();
 
+            DependencyService.Register<DatabaseService>();
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
