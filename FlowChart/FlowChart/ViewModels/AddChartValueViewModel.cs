@@ -34,14 +34,7 @@ namespace FlowChart.ViewModels
 
             int readingId = await databaseService.InsertReadingAsync(reading);
 
-            var readings = await databaseService.GetMonthAsync(DateTime.UtcNow);
-
-            reading.Value = 123;
-            await databaseService.UpdateReadingAsync(reading);
-
-            readings = await databaseService.GetMonthAsync(DateTime.UtcNow);
-
-            //MessagingCenter.Send(this, MessagingKeys.AddValue, reading);
+            MessagingCenter.Send(this, MessagingKeys.AddValue, reading);
 
             await Shell.Current.Navigation.PopModalAsync();
         }

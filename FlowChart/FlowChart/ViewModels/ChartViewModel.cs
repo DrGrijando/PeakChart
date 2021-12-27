@@ -1,9 +1,11 @@
 ﻿using FlowChart.Constants;
 using FlowChart.Database.Models;
-using FlowChart.Models;
+using FlowChart.Database.Services;
+using FlowChart.Views;
 using FlowChart.Views.Modals;
 using Microcharts;
 using SkiaSharp;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,8 +14,9 @@ namespace FlowChart.ViewModels
 {
     public class ChartViewModel : BaseViewModel
     {
+        private readonly DatabaseService databaseService;
+
         private ObservableCollection<ChartEntry> entries;
-        private Chart chart;
 
         public ObservableCollection<ChartEntry> Entries 
         {
@@ -21,73 +24,26 @@ namespace FlowChart.ViewModels
             set { SetProperty(ref entries, value); }
         }
 
-        public Chart Chart
-        {
-            get { return chart; }
-            set { SetProperty(ref chart, value); }
-        }
-
         public Command AddValueCommand { get; }
 
-        public ChartViewModel() 
+        public ChartViewModel()
         {
-            entries = PopulateChart();
+            databaseService = DependencyService.Get<DatabaseService>();
+
             AddValueCommand = new Command(async () => await AddValueCommandExecute());
         }
 
-        private ObservableCollection<ChartEntry> PopulateChart()
+        public override async Task Initialize()
         {
-            return new ObservableCollection<ChartEntry>
+            await base.Initialize();
+            
+            List<Reading> readings = await databaseService.GetMonthAsync(databaseService.CurrentMonth.Id);
+            ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
+            foreach (Reading reading in readings)
             {
-                AddChartEntry(new Reading()
-                {
-                    Value = 700,
-                    IsNightPeriod = false,
-                    Date = new System.DateTime(2021, 1, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 720,
-                    IsNightPeriod = true,
-                    Date = new System.DateTime(2021, 2, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 690,
-                    IsNightPeriod = false,
-                    Date = new System.DateTime(2021, 3, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 700,
-                    IsNightPeriod = true,
-                    Date = new System.DateTime(2021, 4, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 710,
-                    IsNightPeriod = true,
-                    Date = new System.DateTime(2021, 5, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 700,
-                    IsNightPeriod = true,
-                    Date = new System.DateTime(2021, 6, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 720,
-                    IsNightPeriod = false,
-                    Date = new System.DateTime(2021, 7, 1)
-                }),
-                AddChartEntry(new Reading()
-                {
-                    Value = 710, 
-                    IsNightPeriod = true, 
-                    Date = new System.DateTime(2021, 8, 1)
-                })
-            };
+                entries.Add(CreateChartEntry(reading));
+            }
+            Entries = entries;
         }
 
         private async Task AddValueCommandExecute()
@@ -95,17 +51,18 @@ namespace FlowChart.ViewModels
             MessagingCenter.Subscribe<AddChartValueViewModel, Reading>(this, MessagingKeys.AddValue, (vm, reading) => 
             {
                 MessagingCenter.Unsubscribe<AddChartValueViewModel, Reading>(this, MessagingKeys.AddValue);
-                Entries.Add(AddChartEntry(reading));
+                Entries.Add(CreateChartEntry(reading));
             });
 
-            await Shell.Current.Navigation.PushModalAsync(new AddChartValuePage());
+            AddChartValuePage page = (AddChartValuePage)await PageFactory.CreatePage<AddChartValuePage>();
+            await Shell.Current.Navigation.PushModalAsync(page);
         }
 
-        private ChartEntry AddChartEntry(Reading reading)
+        private ChartEntry CreateChartEntry(Reading reading)
         {
             ChartEntry entry = new ChartEntry(reading.Value) 
             {
-                Color = SKColor.Parse(reading.IsNightPeriod ? "#FFFFA7" : "#1B2F52")  
+                Color = SKColor.Parse(reading.IsNightPeriod ? "#2C041C" : "#FFD200")  
             };
             entry.ValueLabel = reading.Value.ToString();
             entry.Label = reading.Date.ToString("dd/MM");

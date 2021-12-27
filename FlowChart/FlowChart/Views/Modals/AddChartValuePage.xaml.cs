@@ -6,10 +6,10 @@ namespace FlowChart.Views.Modals
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddChartValuePage
     {
-        public AddChartValuePage()
+        public AddChartValuePage(AddChartValueViewModel vm)
         {
             InitializeComponent();
-            BindingContext = new AddChartValueViewModel();
+            BindingContext = vm;
         }
     }
 }

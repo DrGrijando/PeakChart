@@ -12,16 +12,14 @@ namespace FlowChart.Views
     {
         private readonly ChartViewModel vm;
 
-        public ChartPage()
+        public ChartPage(ChartViewModel vm)
         {
             InitializeComponent();
-            BindingContext = new ChartViewModel();
-            vm = BindingContext as ChartViewModel;
+            BindingContext = this.vm = vm;
 
             vm.Entries.CollectionChanged += Entries_CollectionChanged;
 
-            chart.WidthRequest = vm.Entries.Count * 16;
-            chart.Chart = new LineChart() 
+            chart.Chart = new LineChart()
             {
                 MinValue = 500,
                 MaxValue = 750,
@@ -29,11 +27,12 @@ namespace FlowChart.Views
                 LineSize = 10,
                 LineMode = LineMode.Straight,
                 EnableYFadeOutGradient = true,
-                LabelOrientation = Orientation.Horizontal,
+                LabelOrientation = Orientation.Vertical,
                 LabelTextSize = 30,
-                ValueLabelOrientation = Orientation.Horizontal,
+                ValueLabelOrientation = Orientation.Vertical,
                 Entries = vm.Entries
             };
+            chart.WidthRequest = vm.Entries != null ? vm.Entries.Count * 20 : 200;
         }
 
         ~ChartPage() 
@@ -44,6 +43,7 @@ namespace FlowChart.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            
             chart.Chart.IsAnimated = false;
         }
 

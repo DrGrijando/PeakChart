@@ -8,6 +8,11 @@ namespace FlowChart.Database.Services
     public interface IDatabaseService
     {
         /// <summary>
+        /// Gets the current month information.
+        /// </summary>
+        ReadingMonth CurrentMonth { get; }
+
+        /// <summary>
         /// Initialize service and database.
         /// </summary>
         /// <returns></returns>

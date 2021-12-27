@@ -12,7 +12,8 @@ namespace FlowChart.Database.Services
     public class DatabaseService : IDatabaseService
     {
         private readonly SQLiteAsyncConnection db;
-        private ReadingMonth currentMonth;
+
+        public ReadingMonth CurrentMonth { get; private set; }
 
         public DatabaseService()
         {
@@ -29,12 +30,12 @@ namespace FlowChart.Database.Services
 
             List<ReadingMonth> months = await GetMonthsAsync();
             if (months.Count == 0)
-                currentMonth = await InsertNewMonth();
+                CurrentMonth = await InsertNewMonth();
             else
             {
-                currentMonth = months.First(month => month.Month == DateTime.UtcNow.Month && month.Year == DateTime.UtcNow.Year);
-                if (currentMonth == null)
-                    currentMonth = await InsertNewMonth();
+                CurrentMonth = months.FirstOrDefault(month => month.Month == DateTime.UtcNow.Month && month.Year == DateTime.UtcNow.Year);
+                if (CurrentMonth == null)
+                    CurrentMonth = await InsertNewMonth();
             }
         }
 
@@ -47,9 +48,17 @@ namespace FlowChart.Database.Services
 
         public async Task<List<Reading>> GetMonthAsync(int monthId)
         {
-            AsyncTableQuery<Reading> query = db.Table<Reading>().Where(reading => reading.MonthId == monthId);
-            List<Reading> readings = await query.ToListAsync();
-            return readings;
+            try
+            {
+                AsyncTableQuery<Reading> query = db.Table<Reading>().Where(reading => reading.MonthId == monthId);
+                List<Reading> readings = await query.ToListAsync();
+                return readings;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Write(ex);
+                return null;
+            }
         }
 
         public async Task<List<Reading>> GetMonthAsync(DateTime date)
@@ -61,11 +70,11 @@ namespace FlowChart.Database.Services
 
         public async Task<int> InsertReadingAsync(Reading reading)
         {
-            reading.MonthId = currentMonth.Id;
+            reading.MonthId = CurrentMonth.Id;
             await db.InsertAsync(reading);
 
-            currentMonth.ReadingCount++;
-            await db.UpdateAsync(currentMonth);
+            CurrentMonth.ReadingCount++;
+            await db.UpdateAsync(CurrentMonth);
 
             return reading.Id;
         }

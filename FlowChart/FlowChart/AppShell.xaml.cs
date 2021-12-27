@@ -13,5 +13,12 @@ namespace FlowChart
             Routing.RegisterRoute(nameof(ChartPage), typeof(ChartPage));
             Routing.RegisterRoute(nameof(AddChartValuePage), typeof(AddChartValuePage));
         }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            ChartPage page = (ChartPage)await PageFactory.CreatePage<ChartPage>();
+            await Current.Navigation.PushAsync(page);
+            Current.FlyoutIsPresented = false;
+        }
     }
 }
