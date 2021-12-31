@@ -9,7 +9,7 @@ namespace FlowChart.Database.Models
         [Column("id")]
         public int Id { get; set; }
 
-        [Column(",month")]
+        [Column("month")]
         public int Month { get; set; }
 
         [Column("year")]
