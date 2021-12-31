@@ -1,8 +1,5 @@
 ﻿using FlowChart.ViewModels;
 using Microcharts;
-using SkiaSharp;
-using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FlowChart.Views
@@ -12,10 +9,10 @@ namespace FlowChart.Views
     {
         private readonly ChartViewModel vm;
 
-        public ChartPage(ChartViewModel vm)
+        public ChartPage(ChartViewModel vm) : base(vm)
         {
             InitializeComponent();
-            BindingContext = this.vm = vm;
+            this.vm = vm;
 
             vm.Entries.CollectionChanged += Entries_CollectionChanged;
 

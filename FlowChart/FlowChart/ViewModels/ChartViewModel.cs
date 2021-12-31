@@ -8,13 +8,14 @@ using SkiaSharp;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace FlowChart.ViewModels
 {
     public class ChartViewModel : BaseViewModel
     {
-        private readonly DatabaseService databaseService;
+        private readonly int monthId;
 
         private ObservableCollection<ChartEntry> entries;
 
@@ -24,11 +25,11 @@ namespace FlowChart.ViewModels
             set { SetProperty(ref entries, value); }
         }
 
-        public Command AddValueCommand { get; }
+        public ICommand AddValueCommand { get; }
 
-        public ChartViewModel()
+        public ChartViewModel(int? monthId = null)
         {
-            databaseService = DependencyService.Get<DatabaseService>();
+            this.monthId = monthId ?? DatabaseService.CurrentMonth.Id;
 
             AddValueCommand = new Command(async () => await AddValueCommandExecute());
         }
@@ -37,7 +38,7 @@ namespace FlowChart.ViewModels
         {
             await base.Initialize();
             
-            List<Reading> readings = await databaseService.GetMonthAsync(databaseService.CurrentMonth.Id);
+            List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
             foreach (Reading reading in readings)
             {

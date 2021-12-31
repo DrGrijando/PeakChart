@@ -1,12 +1,12 @@
 ﻿using FlowChart.ViewModels;
 using Xamarin.Forms.Xaml;
 
-namespace FlowChart.Views.Modals
+namespace FlowChart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddChartValuePage
+    public partial class MonthListPage
     {
-        public AddChartValuePage(AddChartValueViewModel vm) : base(vm)
+        public MonthListPage(MonthListViewModel vm) : base(vm)
         {
             InitializeComponent();
         }

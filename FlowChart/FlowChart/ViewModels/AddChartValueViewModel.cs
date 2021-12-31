@@ -3,23 +3,21 @@ using FlowChart.Database.Models;
 using FlowChart.Database.Services;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace FlowChart.ViewModels
 {
     public class AddChartValueViewModel : BaseViewModel
     {
-        private readonly DatabaseService databaseService;
-
         public string Value { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public bool IsNightPeriod { get; set; }
 
-        public Command SaveValueCommand { get; }
+        public ICommand SaveValueCommand { get; }
 
         public AddChartValueViewModel() 
         {
-            databaseService = DependencyService.Get<DatabaseService>();
             SaveValueCommand = new Command(async () => await SaveValueCommandExecute());
         }
 
@@ -32,7 +30,7 @@ namespace FlowChart.ViewModels
                 IsNightPeriod = IsNightPeriod                
             };
 
-            int readingId = await databaseService.InsertReadingAsync(reading);
+            int readingId = await DatabaseService.InsertReadingAsync(reading);
 
             MessagingCenter.Send(this, MessagingKeys.AddValue, reading);
 

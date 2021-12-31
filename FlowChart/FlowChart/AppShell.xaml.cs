@@ -1,6 +1,6 @@
 ﻿using FlowChart.Views;
-using FlowChart.Views.Modals;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FlowChart
@@ -10,14 +10,20 @@ namespace FlowChart
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ChartPage), typeof(ChartPage));
-            Routing.RegisterRoute(nameof(AddChartValuePage), typeof(AddChartValuePage));
         }
 
-        private async void MenuItem_Clicked(object sender, EventArgs e)
+        private async void Chart_Clicked(object sender, EventArgs e)
         {
-            ChartPage page = (ChartPage)await PageFactory.CreatePage<ChartPage>();
-            await Current.Navigation.PushAsync(page);
+            await Navigate<ChartPage>();
+        }
+        private async void Months_Clicked(object sender, EventArgs e)
+        {
+            await Navigate<MonthListPage>();
+        }
+
+        private async Task Navigate<T>()
+        {
+            await Current.Navigation.PushAsync(await PageFactory.CreatePage<T>());
             Current.FlyoutIsPresented = false;
         }
     }

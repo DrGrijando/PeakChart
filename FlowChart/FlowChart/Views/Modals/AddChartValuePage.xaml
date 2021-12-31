@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<base:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
              x:Class="FlowChart.Views.Modals.AddChartValuePage"
              Title="Add new value">
     
@@ -21,4 +22,4 @@
                 Command="{Binding SaveValueCommand}" />
     </StackLayout>
     
-</ContentPage>
+</base:BaseContentPage>

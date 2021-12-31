@@ -84,7 +84,8 @@
     <!--<FlyoutItem Title="Chart" Icon="icon_about.png">
         <ShellContent Route="ChartPage" ContentTemplate="{DataTemplate local:ChartPage}" />
     </FlyoutItem>-->
-    <MenuItem Text="Chart" Icon="icon_about.png" Clicked="MenuItem_Clicked" />
+    <MenuItem Text="Chart" Icon="icon_about.png" Clicked="Chart_Clicked" />
+    <MenuItem Text="Months" Icon="icon_about.png" Clicked="Months_Clicked" />    
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <!--<MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
