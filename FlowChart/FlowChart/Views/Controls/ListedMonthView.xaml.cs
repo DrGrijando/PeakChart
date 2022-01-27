@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms.Xaml;
 
-namespace FlowChart.Views.Templates
+namespace FlowChart.Views.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ListedMonthDataTemplate
+    public partial class ListedMonthView
     {
-        public ListedMonthDataTemplate()
+        public ListedMonthView()
         {
             InitializeComponent();
         }
