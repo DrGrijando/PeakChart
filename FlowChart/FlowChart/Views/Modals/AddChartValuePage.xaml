@@ -6,6 +6,7 @@
              Title="Add new value">
     
     <StackLayout Spacing="16"
+                 WidthRequest="200"
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
         <Label Text="Value" />
@@ -16,7 +17,10 @@
         <DatePicker Date="{Binding Date}" />
 
         <Label Text="Period" />
-        <Switch IsToggled="{Binding IsNightPeriod}" />
+        <StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding IsNightPeriod}" />
+            <Label Text="{Binding SelectedPeriod}"/>
+        </StackLayout>
 
         <Button Text="Save"
                 Command="{Binding SaveValueCommand}" />

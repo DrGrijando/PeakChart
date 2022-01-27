@@ -10,9 +10,21 @@ namespace FlowChart.ViewModels
 {
     public class AddChartValueViewModel : BaseViewModel
     {
+        private bool isNightPeriod;
+
         public string Value { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
-        public bool IsNightPeriod { get; set; }
+        public bool IsNightPeriod 
+        {
+            get { return isNightPeriod; }
+            set 
+            {
+                isNightPeriod = value;
+                RaisePropertyChanged("SelectedPeriod");
+            }
+        }
+
+        public string SelectedPeriod  { get { return IsNightPeriod ? "Night" : "Morning"; } }
 
         public ICommand SaveValueCommand { get; }
 
