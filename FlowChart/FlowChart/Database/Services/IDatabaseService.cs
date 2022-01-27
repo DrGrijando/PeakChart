@@ -64,5 +64,10 @@ namespace FlowChart.Database.Services
         /// </summary>
         /// <returns></returns>
         Task ClearDatabaseAsync();
+
+
+
+
+        Task InsertNewMonthTest(int month, int year);
     }
 }

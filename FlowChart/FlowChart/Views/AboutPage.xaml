@@ -45,6 +45,18 @@
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
+
+                
+                    <Label Text="MONTH" />
+                    <Entry Text="{Binding Month}" />
+                
+                    <Label Text="YEAR" />
+                    <Entry Text="{Binding Year}" />
+                
+                <Button Margin="0,10,0,0" Text="INSERT NEW MONTH"
+                        Command="{Binding AddMonthsCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
             </StackLayout>
         </ScrollView>
     </Grid>

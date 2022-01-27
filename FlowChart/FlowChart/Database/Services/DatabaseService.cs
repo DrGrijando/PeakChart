@@ -119,5 +119,46 @@ namespace FlowChart.Database.Services
             await db.InsertAsync(month);
             return month;
         }
+
+        public async Task InsertNewMonthTest(int month, int year)
+        {
+            // Create month
+            ReadingMonth m = new ReadingMonth()
+            {
+                Month = month,
+                Year = year
+            };
+
+            await db.InsertAsync(m);
+
+            // Add readings
+            Random rand = new Random();
+            List<Reading> readings = new List<Reading>();
+            DateTime date = new DateTime(year, month, 1);
+            for (int i = 0; i < 30; i++)
+            {
+                Reading r = new Reading()
+                {
+                    Date = date,
+                    Value = rand.Next(650, 760),
+                    MonthId = m.Id
+                };
+                if (i > 0)
+                {
+                    r.IsNightPeriod = !readings[i - 1].IsNightPeriod;
+                    r.Note = string.IsNullOrEmpty(readings[i-1].Note) ? "Test note" : null;
+                }
+                readings.Add(r);
+                await db.InsertAsync(r);
+                
+                m.ReadingCount++;
+                if (!string.IsNullOrEmpty(r.Note))
+                    m.NoteCount++;
+
+                await db.UpdateAsync(m);
+
+                date = date.AddDays(1);
+            }
+        }
     }
 }
