@@ -6,7 +6,7 @@
              Title="Add new value">
     
     <StackLayout Spacing="16"
-                 WidthRequest="200"
+                 WidthRequest="300"
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
         <Label Text="Value" />
@@ -21,6 +21,9 @@
             <Switch IsToggled="{Binding IsNightPeriod}" />
             <Label Text="{Binding SelectedPeriod}"/>
         </StackLayout>
+
+        <Label Text="Notes" />
+        <Editor Text="{Binding Note}" />
 
         <Button Text="Save"
                 Command="{Binding SaveValueCommand}" />

@@ -17,5 +17,8 @@ namespace FlowChart.Database.Models
 
         [Column("readingCount")]
         public int ReadingCount { get; set; }
+
+        [Column("noteCount")]
+        public int NoteCount { get; set; }
     }
 }

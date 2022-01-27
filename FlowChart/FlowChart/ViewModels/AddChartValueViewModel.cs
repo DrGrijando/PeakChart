@@ -13,7 +13,11 @@ namespace FlowChart.ViewModels
         private bool isNightPeriod;
 
         public string Value { get; set; }
+
         public DateTime Date { get; set; } = DateTime.Now;
+
+        public string Note { get; set; }
+        
         public bool IsNightPeriod 
         {
             get { return isNightPeriod; }
@@ -24,7 +28,7 @@ namespace FlowChart.ViewModels
             }
         }
 
-        public string SelectedPeriod  { get { return IsNightPeriod ? "Night" : "Morning"; } }
+        public string SelectedPeriod => IsNightPeriod ? "Night" : "Morning";
 
         public ICommand SaveValueCommand { get; }
 
@@ -39,7 +43,8 @@ namespace FlowChart.ViewModels
             {
                 Value = int.Parse(Value),
                 Date = Date,
-                IsNightPeriod = IsNightPeriod                
+                IsNightPeriod = IsNightPeriod,
+                Note = Note
             };
 
             int readingId = await DatabaseService.InsertReadingAsync(reading);

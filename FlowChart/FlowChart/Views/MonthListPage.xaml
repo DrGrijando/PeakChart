@@ -1,23 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <base:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
-             x:Class="FlowChart.Views.MonthListPage">
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
+                      xmlns:templates="clr-namespace:FlowChart.Views.Templates"
+                      x:Class="FlowChart.Views.MonthListPage">
 
-    <CollectionView ItemSizingStrategy="MeasureFirstItem"
+    <CollectionView x:Name="months" ItemSizingStrategy="MeasureFirstItem"
                     SelectionMode="Single"
                     ItemsSource="{Binding Months}"
-                    SelectedItem="{Binding SelectedMonth}"                    
-                    SelectionChangedCommand="{Binding MonthSelectedCommand}">
+                    SelectedItem="{Binding SelectedMonth}">
         <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding Id}" />
-                    <Label Text="{Binding Month}" />
-                    <Label Text="{Binding Year}" />
-                    <Label Text="{Binding ReadingCount}" />
-                </StackLayout>
-            </DataTemplate>
+            <templates:ListedMonthDataTemplate />
         </CollectionView.ItemTemplate>
     </CollectionView>
     

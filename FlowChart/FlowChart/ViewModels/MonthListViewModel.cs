@@ -24,14 +24,15 @@ namespace FlowChart.ViewModels
         public override async Task Initialize()
         {
             await base.Initialize();
-            var months = await DatabaseService.GetMonthsAsync();
+            
+            List<ReadingMonth> months = await DatabaseService.GetMonthsAsync();
             Months = months;
         }
 
         private async Task NavigateToMonthChartAsync()
         {
             ChartPage page = (ChartPage)await PageFactory.CreatePage<ChartPage>(SelectedMonth.Id);
-            await Shell.Current.Navigation.PushModalAsync(page);
+            await Shell.Current.Navigation.PushAsync(page);
         }
     }
 }

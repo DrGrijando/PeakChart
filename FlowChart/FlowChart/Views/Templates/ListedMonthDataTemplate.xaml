@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms" 
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="FlowChart.Views.Templates.ListedMonthDataTemplate">
+    
+    <Grid HeightRequest="40"
+          Padding="16,8">
+
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style x:Key="TitleLabel" TargetType="Label">
+                    <Setter Property="VerticalOptions" Value="Start" />
+                    <Setter Property="FontAttributes" Value="Bold" />
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Label Grid.Column="0" 
+               Style="{StaticResource TitleLabel}"
+               Text="Id" />
+        <Label Grid.Column="0" 
+               VerticalOptions="End"
+               Text="{Binding Id}" />
+
+        <Label Grid.Column="1" 
+               Style="{StaticResource TitleLabel}"
+               Text="Month" />
+        <Label Grid.Column="1" 
+               VerticalOptions="End"
+               Text="{Binding Month}" />
+
+        <Label Grid.Column="2" 
+               Style="{StaticResource TitleLabel}"
+               Text="Year" />
+        <Label Grid.Column="2" 
+               VerticalOptions="End"
+               Text="{Binding Year}" />
+
+        <Label Grid.Column="3" 
+               Style="{StaticResource TitleLabel}"
+               Text="Readings" />
+        <Label Grid.Column="3" 
+               VerticalOptions="End"
+               Text="{Binding ReadingCount}" />
+
+        <Label Grid.Column="4" 
+               Style="{StaticResource TitleLabel}"
+               Text="Notes" />
+        <Label Grid.Column="4" 
+               VerticalOptions="End"
+               Text="{Binding NoteCount}" />
+    </Grid>
+
+</DataTemplate>

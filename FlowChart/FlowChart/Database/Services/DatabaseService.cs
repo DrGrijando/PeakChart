@@ -74,6 +74,9 @@ namespace FlowChart.Database.Services
             await db.InsertAsync(reading);
 
             CurrentMonth.ReadingCount++;
+            if (!string.IsNullOrEmpty(reading.Note))
+                CurrentMonth.NoteCount++;
+
             await db.UpdateAsync(CurrentMonth);
 
             return reading.Id;
