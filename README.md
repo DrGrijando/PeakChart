@@ -3,7 +3,8 @@ Simple app for registering and visualization of daily peak expiratory flow (PEF)
 
 ------------------
 
-MIT License
+# License
+MIT
 
 Copyright (c) 2022 Rubén Gómez Pérez
 
