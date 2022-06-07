@@ -9,9 +9,13 @@
                     SelectionMode="Single"
                     ItemsSource="{Binding Months}"
                     SelectedItem="{Binding SelectedMonth}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="6" />
+        </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <controls:ListedMonthView />
+                <controls:MonthListItemView />
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Grid xmlns="http://xamarin.com/schemas/2014/forms" 
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      x:Class="FlowChart.Views.Controls.ListedMonthView"
+      x:Class="FlowChart.Views.Controls.MonthListItemView"
       HeightRequest="40"
-      Padding="16,8">
+      Padding="10,8"
+      BackgroundColor="Red">
 
     <Grid.Resources>
         <ResourceDictionary>

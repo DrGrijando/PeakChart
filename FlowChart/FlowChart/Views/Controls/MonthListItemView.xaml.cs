@@ -3,9 +3,9 @@
 namespace FlowChart.Views.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ListedMonthView
+    public partial class MonthListItemView
     {
-        public ListedMonthView()
+        public MonthListItemView()
         {
             InitializeComponent();
         }

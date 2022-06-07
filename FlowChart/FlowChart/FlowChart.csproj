@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Controls\ListedMonthView.xaml.cs">
+    <Compile Update="Views\Controls\MonthListItemView.xaml.cs">
       <DependentUpon>ListedMonthView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -22,7 +22,7 @@
     <EmbeddedResource Update="Views\ChartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Controls\ListedMonthView.xaml">
+    <EmbeddedResource Update="Views\Controls\MonthListItemView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Modals\AddChartValuePage.xaml">
