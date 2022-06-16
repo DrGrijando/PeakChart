@@ -1,7 +1,7 @@
-﻿using Xamarin.Forms.Xaml;
-
-namespace FlowChart.Views.Controls
+﻿namespace FlowChart.Views.Controls
 {
+    using Xamarin.Forms.Xaml;
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MonthListItemView
     {

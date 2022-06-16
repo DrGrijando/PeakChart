@@ -1,11 +1,11 @@
-﻿using FlowChart.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FlowChart.Services
+﻿namespace FlowChart.Services
 {
+    using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;

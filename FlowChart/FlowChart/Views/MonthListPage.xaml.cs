@@ -1,8 +1,8 @@
-﻿using FlowChart.ViewModels;
-using Xamarin.Forms.Xaml;
-
-namespace FlowChart.Views
+﻿namespace FlowChart.Views
 {
+    using ViewModels;
+    using Xamarin.Forms.Xaml;
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MonthListPage
     {

@@ -1,14 +1,14 @@
-﻿using FlowChart.Database.Models;
-using SQLite;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
-
-namespace FlowChart.Database.Services
+﻿namespace FlowChart.Database.Services
 {
+    using Models;
+    using SQLite;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xamarin.Essentials;
+    
     public class DatabaseService : IDatabaseService
     {
         private readonly SQLiteAsyncConnection db;

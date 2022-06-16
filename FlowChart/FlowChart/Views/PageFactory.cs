@@ -1,10 +1,10 @@
-﻿using FlowChart.ViewModels;
-using FlowChart.Views.Modals;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
-namespace FlowChart.Views
+﻿namespace FlowChart.Views
 {
+    using ViewModels;
+    using Modals;
+    using System.Threading.Tasks;
+    using Xamarin.Forms;
+    
     public static class PageFactory
     {
         public static async Task<Page> CreatePage<T>(int? monthId = null)

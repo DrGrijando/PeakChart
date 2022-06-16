@@ -6,7 +6,8 @@
                       x:Class="FlowChart.Views.ChartPage">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddValueCommand}" />
+        <ToolbarItem Text="Add" 
+                     Command="{Binding AddValueCommand}" />
     </ContentPage.ToolbarItems>
 
     <ScrollView Orientation="Horizontal"

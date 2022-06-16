@@ -1,10 +1,10 @@
-﻿using FlowChart.Views;
-using System;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
-namespace FlowChart
+﻿namespace FlowChart
 {
+    using Views;
+    using System;
+    using System.Threading.Tasks;
+    using Xamarin.Forms;
+    
     public partial class AppShell : Shell
     {
         public AppShell()

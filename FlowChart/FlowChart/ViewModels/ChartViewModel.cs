@@ -1,18 +1,17 @@
-﻿using FlowChart.Constants;
-using FlowChart.Database.Models;
-using FlowChart.Database.Services;
-using FlowChart.Views;
-using FlowChart.Views.Modals;
-using Microcharts;
-using SkiaSharp;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms;
-
-namespace FlowChart.ViewModels
+﻿namespace FlowChart.ViewModels
 {
+    using Constants;
+    using FlowChart.Database.Models;
+    using Views;
+    using Views.Modals;
+    using Microcharts;
+    using SkiaSharp;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Xamarin.Forms;
+    
     public class ChartViewModel : BaseViewModel
     {
         private readonly int monthId;

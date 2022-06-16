@@ -1,13 +1,12 @@
-﻿using FlowChart.Constants;
-using FlowChart.Database.Models;
-using FlowChart.Database.Services;
-using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms;
-
-namespace FlowChart.ViewModels
+﻿namespace FlowChart.ViewModels
 {
+    using Constants;
+    using FlowChart.Database.Models;
+    using System;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Xamarin.Forms;
+    
     public class AddChartValueViewModel : BaseViewModel
     {
         private bool isNightPeriod;

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace FlowChart.Services
+﻿namespace FlowChart.Services
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    
     public interface IDataStore<T>
     {
         Task<bool> AddItemAsync(T item);

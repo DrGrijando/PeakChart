@@ -1,9 +1,9 @@
-﻿using FlowChart.Database.Services;
-using FlowChart.Services;
-using Xamarin.Forms;
-
-namespace FlowChart
+﻿namespace FlowChart
 {
+    using FlowChart.Database.Services;
+    using Services;
+    using Xamarin.Forms;
+    
     public partial class App : Application
     {
 

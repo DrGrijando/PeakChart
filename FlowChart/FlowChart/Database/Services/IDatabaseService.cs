@@ -1,10 +1,10 @@
-﻿using FlowChart.Database.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace FlowChart.Database.Services
+﻿namespace FlowChart.Database.Services
 {
+    using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    
     public interface IDatabaseService
     {
         /// <summary>

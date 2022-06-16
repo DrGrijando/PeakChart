@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlowChart.Models
+﻿namespace FlowChart.Models
 {
     public class Item
     {

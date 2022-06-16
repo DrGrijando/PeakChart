@@ -1,9 +1,9 @@
-﻿using FlowChart.ViewModels;
-using Microcharts;
-using Xamarin.Forms.Xaml;
-
-namespace FlowChart.Views
+﻿namespace FlowChart.Views
 {
+    using ViewModels;
+    using Microcharts;
+    using Xamarin.Forms.Xaml;
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartPage
     {
