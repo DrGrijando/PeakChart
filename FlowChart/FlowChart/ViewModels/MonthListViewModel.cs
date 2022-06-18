@@ -30,8 +30,7 @@
 
         private async Task NavigateToMonthChartAsync()
         {
-            ChartPage page = (ChartPage)PageFactory.CreatePage<ChartPage>(SelectedMonth.Id);
-            await Shell.Current.Navigation.PushAsync(page);
+            await NavigationService.NavigateAsync<ChartViewModel>(SelectedMonth.Id);
         }
     }
 }

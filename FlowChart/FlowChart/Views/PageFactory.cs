@@ -7,36 +7,41 @@
     public static class PageFactory
     {
         /// <summary>
-        /// Creates a page of the specified type.
+        /// Creates a page using the specified ViewModel.
         /// </summary>
-        /// <typeparam name="T">The page type to be created.</typeparam>
-        /// <param name="parameter">A parameter to pass to the page ViewModel when being created.</param>
+        /// <typeparam name="T">The ViewModel to use.</typeparam>
+        /// <param name="parameter">A parameter to pass to the ViewModel when being created.</param>
         /// <returns></returns>
-        public static Page CreatePage<T>(object parameter = null)
+        public static Page CreatePage<T>(object parameter = null) where T : BaseViewModel
         {
             switch (typeof(T).Name)
             {
-                case nameof(HomePage):
+                case nameof(HomeViewModel):
                     HomeViewModel homeVm = new HomeViewModel();
                     homeVm.Initialize();
                     return new HomePage(homeVm);
 
-                case nameof(ChartPage):
+                case nameof(ChartViewModel):
                     ChartViewModel chartVm = new ChartViewModel(parameter);
                     chartVm.Initialize();
                     return new ChartPage(chartVm);
 
-                case nameof(AddChartValuePage):
+                case nameof(AddChartValueViewModel):
                     AddChartValueViewModel addChartValueViewModel = new AddChartValueViewModel();
                     addChartValueViewModel.Initialize();
                     return new AddChartValuePage(addChartValueViewModel);
 
-                case nameof(MonthListPage):
+                case nameof(MonthListViewModel):
                     MonthListViewModel monthListVm = new MonthListViewModel();
                     monthListVm.Initialize();
                     return new MonthListPage(monthListVm);
 
-                default: 
+                case nameof(MasterFlyoutViewModel):
+                    MasterFlyoutViewModel flyoutVm = new MasterFlyoutViewModel();
+                    flyoutVm.Initialize();
+                    return new MasterPageFlyout(flyoutVm);
+
+                default:
                     return null;
             }
         }

@@ -50,7 +50,7 @@
 
             MessagingCenter.Send(this, MessagingKeys.AddValue, reading);
 
-            await Shell.Current.Navigation.PopModalAsync();
+            await NavigationService.GoBack();
         }
     }
 }

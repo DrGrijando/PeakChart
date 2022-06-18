@@ -11,9 +11,7 @@
         public ChartPage(ChartViewModel vm) : base(vm)
         {
             InitializeComponent();
-
-            ViewModel.Entries.CollectionChanged += Entries_CollectionChanged;
-
+            
             chart.Chart = new LineChart()
             {
                 MinValue = 500,
@@ -38,7 +36,7 @@
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
+            ViewModel.Entries.CollectionChanged += Entries_CollectionChanged;
             chart.Chart.IsAnimated = false;
         }
 

@@ -1,38 +1,43 @@
-﻿using FlowChart.Views;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
-namespace FlowChart.Services
+﻿namespace FlowChart.Services
 {
+    using FlowChart.ViewModels;
+    using FlowChart.Views;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xamarin.Forms;
+
     public class NavigationService : INavigationService
     {
-        private Page MainPage => Application.Current.MainPage;
+        private Page CurrentPage => (Application.Current.MainPage as FlyoutPage).Detail;
 
         public async Task GoBack()
         {
-            await MainPage.Navigation.PopAsync();
+            if (CurrentPage.Navigation.ModalStack.Any())
+                await CurrentPage.Navigation.PopModalAsync();
+            else
+                await CurrentPage.Navigation.PopAsync();
         }
 
-        public async Task NavigateAsync<T>(bool animated = true)
+        public async Task NavigateAsync<T>(bool animated = true) where T : BaseViewModel
         {
             await NavigateAsync<T>(null, animated);
         }
 
-        public async Task NavigateAsync<T>(object parameter, bool animated = true)
+        public async Task NavigateAsync<T>(object parameter, bool animated = true) where T : BaseViewModel
         {
             Page page = PageFactory.CreatePage<T>(parameter);
-            await MainPage.Navigation.PushAsync(page, animated);
+            await CurrentPage.Navigation.PushAsync(page, animated);
         }
 
-        public async Task NavigateModalAsync<T>(bool animated = true)
+        public async Task NavigateModalAsync<T>(bool animated = true) where T : BaseViewModel
         {
-            await NavigateModalAsync<Tab>(null, animated);
+            await NavigateModalAsync<T>(null, animated);
         }
 
-        public async Task NavigateModalAsync<T>(object parameter, bool animated = true)
+        public async Task NavigateModalAsync<T>(object parameter, bool animated = true) where T : BaseViewModel
         {
             Page page = PageFactory.CreatePage<T>(parameter);
-            await MainPage.Navigation.PushModalAsync(page, animated);
+            await CurrentPage.Navigation.PushModalAsync(page, animated);
         }
     }
 }

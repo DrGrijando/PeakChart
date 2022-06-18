@@ -1,6 +1,7 @@
 ﻿namespace FlowChart
 {
     using FlowChart.Database.Services;
+    using FlowChart.ViewModels;
     using FlowChart.Views;
     using Services;
     using Xamarin.Forms;
@@ -13,8 +14,11 @@
             InitializeComponent();
             RegisterServices();
 
-
-            MainPage = PageFactory.CreatePage<HomePage>();
+            MainPage = new MasterPage
+            {
+                Flyout = PageFactory.CreatePage<MasterFlyoutViewModel>(),
+                Detail = PageFactory.CreatePage<HomeViewModel>()
+            };
         }
 
         protected override void OnStart()
