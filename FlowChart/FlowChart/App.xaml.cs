@@ -1,6 +1,7 @@
 ﻿namespace FlowChart
 {
     using FlowChart.Database.Services;
+    using FlowChart.Views;
     using Services;
     using Xamarin.Forms;
     
@@ -10,10 +11,10 @@
         public App()
         {
             InitializeComponent();
+            RegisterServices();
 
-            DependencyService.Register<DatabaseService>();
-            DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+
+            MainPage = PageFactory.CreatePage<AboutPage>();
         }
 
         protected override void OnStart()
@@ -26,6 +27,13 @@
 
         protected override void OnResume()
         {
+        }
+
+        private void RegisterServices()
+        {
+            DependencyService.Register<DatabaseService>();
+            DependencyService.Register<NavigationService>();
+            DependencyService.Register<MockDataStore>();
         }
     }
 }

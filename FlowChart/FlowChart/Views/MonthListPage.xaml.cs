@@ -1,17 +1,15 @@
 ﻿namespace FlowChart.Views
 {
+    using FlowChart.Views.Base;
     using ViewModels;
     using Xamarin.Forms.Xaml;
     
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MonthListPage
+    public partial class MonthListPage : BaseContentPage<MonthListViewModel>
     {
-        private readonly MonthListViewModel vm;
-
         public MonthListPage(MonthListViewModel vm) : base(vm)
         {
             InitializeComponent();
-            this.vm = vm;
 
             months.SelectionChanged += Months_SelectionChanged;
         }
@@ -27,7 +25,7 @@
             // won't let go the selected month through binding :_)
             if (months.SelectedItem != null)
             {
-                vm.MonthSelectedCommand.Execute(null);
+                ViewModel.MonthSelectedCommand.Execute(null);
                 months.SelectedItem = null;
             }
         }

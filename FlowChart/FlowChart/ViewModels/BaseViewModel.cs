@@ -1,6 +1,7 @@
 ﻿namespace FlowChart.ViewModels
 {
     using FlowChart.Database.Services;
+    using FlowChart.Services;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -14,6 +15,8 @@
         private string title = string.Empty;
 
         protected DatabaseService DatabaseService { get; }
+
+        protected NavigationService NavigationService { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,15 +32,25 @@
             set => SetProperty(ref title, value);
         }
 
-        protected BaseViewModel()
+        public BaseViewModel()
         {
             DatabaseService = DependencyService.Get<DatabaseService>();
+            NavigationService = DependencyService.Get<NavigationService>();
         }
 
         /// <summary>
-        /// Initializes the ViewModel.
+        /// Initializes the ViewModel aspects that don't need to be done asynchronously.
         /// </summary>
-        public virtual async Task Initialize() { }
+        public virtual void Initialize() { }
+
+        /// <summary>
+        /// Initializes the ViewModel aspects that need to be done asynchronously.
+        /// </summary>
+        /// <returns></returns>
+        public virtual Task InitializeAsync() 
+        {
+            return Task.CompletedTask;
+        }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",

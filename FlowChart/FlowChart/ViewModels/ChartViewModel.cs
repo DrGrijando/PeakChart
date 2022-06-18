@@ -26,16 +26,17 @@
 
         public ICommand AddValueCommand { get; }
 
-        public ChartViewModel(int? monthId = null)
+        public ChartViewModel(object parameter)
         {
-            this.monthId = monthId ?? DatabaseService.CurrentMonth.Id;
+            if (parameter is int monthId)
+                this.monthId = monthId;
 
             AddValueCommand = new Command(async () => await AddValueCommandExecute());
         }
 
-        public override async Task Initialize()
+        public override async Task InitializeAsync()
         {
-            await base.Initialize();
+            await base.InitializeAsync();
             
             List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
@@ -54,8 +55,7 @@
                 Entries.Add(CreateChartEntry(reading));
             });
 
-            AddChartValuePage page = (AddChartValuePage)await PageFactory.CreatePage<AddChartValuePage>();
-            await Shell.Current.Navigation.PushModalAsync(page);
+            await NavigationService.NavigateModalAsync<AddChartValueViewModel>();
         }
 
         private ChartEntry CreateChartEntry(Reading reading)

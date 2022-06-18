@@ -1,12 +1,13 @@
 ﻿namespace FlowChart.Views
 {
-    using Xamarin.Forms;
+    using FlowChart.ViewModels;
+    using Base;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AboutPage : ContentPage
+    public partial class AboutPage : BaseContentPage<AboutViewModel>
     {
-        public AboutPage()
+        public AboutPage(AboutViewModel vm) : base(vm)
         {
             InitializeComponent();
         }

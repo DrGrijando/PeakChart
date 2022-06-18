@@ -1,15 +1,19 @@
 ﻿namespace FlowChart
 {
+    using Services;
     using Views;
     using System;
     using System.Threading.Tasks;
     using Xamarin.Forms;
-    
+
     public partial class AppShell : Shell
     {
+        private readonly NavigationService navigationService;
+
         public AppShell()
         {
             InitializeComponent();
+            navigationService = DependencyService.Get<NavigationService>();
         }
 
         private async void Chart_Clicked(object sender, EventArgs e)
@@ -23,7 +27,7 @@
 
         private async Task Navigate<T>()
         {
-            await Current.Navigation.PushAsync(await PageFactory.CreatePage<T>());
+            await navigationService.NavigateAsync<T>();
             Current.FlyoutIsPresented = false;
         }
     }
