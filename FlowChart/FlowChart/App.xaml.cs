@@ -14,7 +14,7 @@
             RegisterServices();
 
 
-            MainPage = PageFactory.CreatePage<AboutPage>();
+            MainPage = PageFactory.CreatePage<HomePage>();
         }
 
         protected override void OnStart()

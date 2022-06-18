@@ -5,9 +5,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AboutPage : BaseContentPage<AboutViewModel>
+    public partial class HomePage : BaseContentPage<HomeViewModel>
     {
-        public AboutPage(AboutViewModel vm) : base(vm)
+        public HomePage(HomeViewModel vm) : base(vm)
         {
             InitializeComponent();
         }

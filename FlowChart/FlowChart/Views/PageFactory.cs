@@ -16,10 +16,10 @@
         {
             switch (typeof(T).Name)
             {
-                case nameof(AboutPage):
-                    AboutViewModel aboutVm = new AboutViewModel();
-                    aboutVm.Initialize();
-                    return new AboutPage(aboutVm);
+                case nameof(HomePage):
+                    HomeViewModel homeVm = new HomeViewModel();
+                    homeVm.Initialize();
+                    return new HomePage(homeVm);
 
                 case nameof(ChartPage):
                     ChartViewModel chartVm = new ChartViewModel(parameter);
