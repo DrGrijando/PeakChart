@@ -14,11 +14,13 @@
             InitializeComponent();
             RegisterServices();
 
-            MainPage = new MasterPage
+            MasterPage masterPage = new MasterPage
             {
                 Flyout = PageFactory.CreatePage<MasterFlyoutViewModel>(),
                 Detail = PageFactory.CreatePage<HomeViewModel>()
             };
+
+            MainPage = new NavigationPage(masterPage);
         }
 
         protected override void OnStart()

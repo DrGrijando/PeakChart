@@ -18,6 +18,8 @@
 
         protected NavigationService NavigationService { get; }
 
+        public event EventHandler InitializationFinished;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsBusy
@@ -49,6 +51,7 @@
         /// <returns></returns>
         public virtual Task InitializeAsync() 
         {
+            InitializationFinished?.Invoke(this, null);
             return Task.CompletedTask;
         }
 

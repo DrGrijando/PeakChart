@@ -1,5 +1,6 @@
 ﻿namespace FlowChart.Views.Base
 {
+    using System.Threading.Tasks;
     using ViewModels;
     using Xamarin.Forms;
     
@@ -16,6 +17,8 @@
         {
             base.OnAppearing();
 
+            // Await for page navigation to complete its animation
+            await Task.Delay(200);
             await ViewModel.InitializeAsync();
         }
     }

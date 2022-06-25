@@ -8,7 +8,7 @@
 
     public class NavigationService : INavigationService
     {
-        private Page CurrentPage => (Application.Current.MainPage as FlyoutPage).Detail;
+        private Page CurrentPage => ((Application.Current.MainPage as NavigationPage).RootPage as MasterPage).Detail;
 
         public async Task GoBack()
         {

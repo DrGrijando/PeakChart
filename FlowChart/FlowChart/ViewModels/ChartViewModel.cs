@@ -18,10 +18,10 @@
 
         private ObservableCollection<ChartEntry> entries;
 
-        public ObservableCollection<ChartEntry> Entries 
+        public ObservableCollection<ChartEntry> Entries
         {
-            get { return entries; }
-            set { SetProperty(ref entries, value); }
+            get => entries;
+            set => SetProperty(ref entries, value);
         }
 
         public ICommand AddValueCommand { get; }
@@ -35,9 +35,7 @@
         }
 
         public override async Task InitializeAsync()
-        {
-            await base.InitializeAsync();
-            
+        {            
             List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
             foreach (Reading reading in readings)
@@ -45,6 +43,8 @@
                 entries.Add(CreateChartEntry(reading));
             }
             Entries = entries;
+
+            await base.InitializeAsync();
         }
 
         private async Task AddValueCommandExecute()

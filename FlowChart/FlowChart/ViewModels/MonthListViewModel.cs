@@ -9,7 +9,13 @@
 
     public class MonthListViewModel : BaseViewModel
     {
-        public List<ReadingMonth> Months { get; set; }
+        private IList<ReadingMonth> months;
+
+        public IList<ReadingMonth> Months
+        {
+            get => months;
+            set => SetProperty(ref months, value);
+        }
 
         public ReadingMonth SelectedMonth { get; set; }
 
@@ -22,10 +28,10 @@
 
         public override async Task InitializeAsync()
         {
-            await base.InitializeAsync();
-            
             List<ReadingMonth> months = await DatabaseService.GetMonthsAsync();
             Months = months;
+
+            await base.InitializeAsync();
         }
 
         private async Task NavigateToMonthChartAsync()
