@@ -1,15 +1,21 @@
-﻿using FlowChart.Database.Models;
-using FlowChart.Views;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms;
-
-namespace FlowChart.ViewModels
+﻿namespace FlowChart.ViewModels
 {
+    using FlowChart.Database.Models;
+    using FlowChart.Views;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Xamarin.Forms;
+
     public class MonthListViewModel : BaseViewModel
     {
-        public List<ReadingMonth> Months { get; set; }
+        private IList<ReadingMonth> months;
+
+        public IList<ReadingMonth> Months
+        {
+            get => months;
+            set => SetProperty(ref months, value);
+        }
 
         public ReadingMonth SelectedMonth { get; set; }
 
@@ -20,18 +26,21 @@ namespace FlowChart.ViewModels
             MonthSelectedCommand = new Command(async () => await NavigateToMonthChartAsync());
         }
 
-        public override async Task Initialize()
+        /// <summary>
+        /// Initializes the ViewModel aspects that need to be done asynchronously.
+        /// </summary>
+        /// <returns></returns>
+        public override async Task InitializeAsync()
         {
-            await base.Initialize();
-            
             List<ReadingMonth> months = await DatabaseService.GetMonthsAsync();
             Months = months;
+
+            await base.InitializeAsync();
         }
 
         private async Task NavigateToMonthChartAsync()
         {
-            ChartPage page = (ChartPage)await PageFactory.CreatePage<ChartPage>(SelectedMonth.Id);
-            await Shell.Current.Navigation.PushAsync(page);
+            await NavigationService.NavigateAsync<ChartViewModel>(SelectedMonth.Id);
         }
     }
 }

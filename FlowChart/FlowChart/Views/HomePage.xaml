@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FlowChart.Views.AboutPage"
-             xmlns:vm="clr-namespace:FlowChart.ViewModels"
-             Title="{Binding Title}">
-    
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
+<base:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
+                      xmlns:vm="clr-namespace:FlowChart.ViewModels"
+                      x:Class="FlowChart.Views.HomePage"
+                      x:TypeArguments="vm:HomeViewModel"
+                      Title="{Binding Title, Mode=OneTime}">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -44,4 +42,4 @@
         </StackLayout>
     </StackLayout>
 
-</ContentPage>
+</base:BaseContentPage>

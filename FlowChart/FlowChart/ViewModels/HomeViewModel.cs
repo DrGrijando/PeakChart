@@ -3,7 +3,7 @@
     using System.Windows.Input;
     using Xamarin.Forms;
     
-    public class AboutViewModel : BaseViewModel
+    public class HomeViewModel : BaseViewModel
     {
         private bool showDeveloperFunctions;
         
@@ -16,7 +16,7 @@
             set => SetProperty(ref showDeveloperFunctions, value);
         }
 
-        public AboutViewModel()
+        public HomeViewModel()
         {
             Title = "Home";
             

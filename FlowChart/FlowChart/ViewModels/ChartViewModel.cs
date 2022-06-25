@@ -18,25 +18,28 @@
 
         private ObservableCollection<ChartEntry> entries;
 
-        public ObservableCollection<ChartEntry> Entries 
+        public ObservableCollection<ChartEntry> Entries
         {
-            get { return entries; }
-            set { SetProperty(ref entries, value); }
+            get => entries;
+            set => SetProperty(ref entries, value);
         }
 
         public ICommand AddValueCommand { get; }
 
-        public ChartViewModel(int? monthId = null)
+        public ChartViewModel(object parameter)
         {
-            this.monthId = monthId ?? DatabaseService.CurrentMonth.Id;
+            if (parameter is int monthId)
+                this.monthId = monthId;
 
             AddValueCommand = new Command(async () => await AddValueCommandExecute());
         }
 
-        public override async Task Initialize()
-        {
-            await base.Initialize();
-            
+        /// <summary>
+        /// Initializes the ViewModel aspects that need to be done asynchronously.
+        /// </summary>
+        /// <returns></returns>
+        public override async Task InitializeAsync()
+        {            
             List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
             foreach (Reading reading in readings)
@@ -44,6 +47,8 @@
                 entries.Add(CreateChartEntry(reading));
             }
             Entries = entries;
+
+            await base.InitializeAsync();
         }
 
         private async Task AddValueCommandExecute()
@@ -54,8 +59,7 @@
                 Entries.Add(CreateChartEntry(reading));
             });
 
-            AddChartValuePage page = (AddChartValuePage)await PageFactory.CreatePage<AddChartValuePage>();
-            await Shell.Current.Navigation.PushModalAsync(page);
+            await NavigationService.NavigateModalAsync<AddChartValueViewModel>();
         }
 
         private ChartEntry CreateChartEntry(Reading reading)

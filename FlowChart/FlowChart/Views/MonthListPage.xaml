@@ -3,7 +3,9 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
                       xmlns:controls="clr-namespace:FlowChart.Views.Controls"
-                      x:Class="FlowChart.Views.MonthListPage">
+                      xmlns:vm="clr-namespace:FlowChart.ViewModels"
+                      x:Class="FlowChart.Views.MonthListPage"
+                      x:TypeArguments="vm:MonthListViewModel">
 
     <CollectionView x:Name="months" ItemSizingStrategy="MeasureFirstItem"
                     SelectionMode="Single"

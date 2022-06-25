@@ -3,19 +3,17 @@
     using ViewModels;
     using Microcharts;
     using Xamarin.Forms.Xaml;
-    
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChartPage
-    {
-        private readonly ChartViewModel vm;
+    using FlowChart.Views.Base;
+    using System.Threading.Tasks;
+    using System;
 
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ChartPage : BaseContentPage<ChartViewModel>
+    {
         public ChartPage(ChartViewModel vm) : base(vm)
         {
             InitializeComponent();
-            this.vm = vm;
-
-            vm.Entries.CollectionChanged += Entries_CollectionChanged;
-
+            
             chart.Chart = new LineChart()
             {
                 MinValue = 500,
@@ -27,26 +25,31 @@
                 LabelOrientation = Orientation.Vertical,
                 LabelTextSize = 30,
                 ValueLabelOrientation = Orientation.Vertical,
-                Entries = vm.Entries
+                AnimationDuration = TimeSpan.FromMilliseconds(1000)
             };
-            chart.WidthRequest = vm.Entries != null ? vm.Entries.Count * 20 : 200;
+            chart.WidthRequest = ViewModel.Entries != null ? ViewModel.Entries.Count * 20 : 200;
+
+            vm.InitializationFinished += ViewModel_InitializationFinished;
         }
 
         ~ChartPage() 
         {
-            vm.Entries.CollectionChanged -= Entries_CollectionChanged;
+            ViewModel.Entries.CollectionChanged -= Entries_CollectionChanged;
         }
 
-        protected override void OnAppearing()
+        private async void ViewModel_InitializationFinished(object sender, System.EventArgs e)
         {
-            base.OnAppearing();
+            ViewModel.Entries.CollectionChanged += Entries_CollectionChanged;
+
+            chart.Chart.Entries = ViewModel.Entries;
             
-            chart.Chart.IsAnimated = false;
+            await Task.Delay(chart.Chart.AnimationDuration);
+            chart.Chart.IsAnimated = false;           
         }
 
         private void Entries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            chart.Chart.Entries = vm.Entries;
+            chart.Chart.Entries = ViewModel.Entries;
         }
     }
 }
