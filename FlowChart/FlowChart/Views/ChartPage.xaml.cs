@@ -27,7 +27,6 @@
                 ValueLabelOrientation = Orientation.Vertical,
                 AnimationDuration = TimeSpan.FromMilliseconds(1000)
             };
-            chart.WidthRequest = ViewModel.Entries != null ? ViewModel.Entries.Count * 20 : 200;
 
             vm.InitializationFinished += ViewModel_InitializationFinished;
         }
@@ -41,8 +40,9 @@
         {
             ViewModel.Entries.CollectionChanged += Entries_CollectionChanged;
 
+            chart.WidthRequest = ViewModel.Entries != null ? ViewModel.Entries.Count * 20 : 200;
             chart.Chart.Entries = ViewModel.Entries;
-            
+
             await Task.Delay(chart.Chart.AnimationDuration);
             chart.Chart.IsAnimated = false;           
         }

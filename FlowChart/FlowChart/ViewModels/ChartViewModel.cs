@@ -2,8 +2,6 @@
 {
     using Constants;
     using FlowChart.Database.Models;
-    using Views;
-    using Views.Modals;
     using Microcharts;
     using SkiaSharp;
     using System.Collections.Generic;
@@ -11,12 +9,19 @@
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Xamarin.Forms;
-    
+
     public class ChartViewModel : BaseViewModel
     {
         private readonly int monthId;
 
+        private ObservableCollection<Reading> readingsWithNotes;
         private ObservableCollection<ChartEntry> entries;
+
+        public ObservableCollection<Reading> ReadingsWithNotes
+        {
+            get => readingsWithNotes;
+            set => SetProperty(ref readingsWithNotes, value);
+        }
 
         public ObservableCollection<ChartEntry> Entries
         {
@@ -42,11 +47,16 @@
         {            
             List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
+            ObservableCollection<Reading> readingsWithNotes = new ObservableCollection<Reading>();
             foreach (Reading reading in readings)
             {
                 entries.Add(CreateChartEntry(reading));
+                if (!string.IsNullOrEmpty(reading.Note))
+                    readingsWithNotes.Add(reading);
             }
+
             Entries = entries;
+            ReadingsWithNotes = readingsWithNotes;
 
             await base.InitializeAsync();
         }

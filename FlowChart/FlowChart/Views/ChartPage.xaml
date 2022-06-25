@@ -2,7 +2,8 @@
 <base:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
-                      xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+                      xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+                      xmlns:controls="clr-namespace:FlowChart.Views.Controls"
                       xmlns:vm="clr-namespace:FlowChart.ViewModels"
                       x:Class="FlowChart.Views.ChartPage"
                       x:TypeArguments="vm:ChartViewModel">
@@ -12,10 +13,31 @@
                      Command="{Binding AddValueCommand}" />
     </ContentPage.ToolbarItems>
 
-    <ScrollView Orientation="Horizontal"
-                HeightRequest="300"
-                VerticalOptions="Center">
-        <charts:ChartView x:Name="chart" />
-    </ScrollView>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0" 
+                    Orientation="Horizontal"
+                    HeightRequest="300"
+                    VerticalOptions="Center">
+            <charts:ChartView x:Name="chart" />
+        </ScrollView>
+        <CollectionView Grid.Row="1"
+                        ItemSizingStrategy="MeasureFirstItem"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding ReadingsWithNotes}"
+                        SelectedItem="{Binding SelectedReading}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="6" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <controls:NoteListItemView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </base:BaseContentPage>
