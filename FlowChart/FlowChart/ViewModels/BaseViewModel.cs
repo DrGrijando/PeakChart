@@ -46,7 +46,8 @@
         public virtual void Initialize() { }
 
         /// <summary>
-        /// Initializes the ViewModel aspects that need to be done asynchronously.
+        /// <para>Initializes the ViewModel aspects that need to be done asynchronously.</para>
+        /// <para>The base method should be called AFTER the overrided method in order for InitializationFinished to be thrown when the initialization has truly finished.</para>
         /// </summary>
         /// <returns></returns>
         public virtual Task InitializeAsync() 

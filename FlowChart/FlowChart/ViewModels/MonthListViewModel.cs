@@ -26,6 +26,10 @@
             MonthSelectedCommand = new Command(async () => await NavigateToMonthChartAsync());
         }
 
+        /// <summary>
+        /// Initializes the ViewModel aspects that need to be done asynchronously.
+        /// </summary>
+        /// <returns></returns>
         public override async Task InitializeAsync()
         {
             List<ReadingMonth> months = await DatabaseService.GetMonthsAsync();

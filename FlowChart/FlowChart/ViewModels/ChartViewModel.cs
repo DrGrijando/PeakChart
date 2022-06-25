@@ -34,6 +34,10 @@
             AddValueCommand = new Command(async () => await AddValueCommandExecute());
         }
 
+        /// <summary>
+        /// Initializes the ViewModel aspects that need to be done asynchronously.
+        /// </summary>
+        /// <returns></returns>
         public override async Task InitializeAsync()
         {            
             List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
