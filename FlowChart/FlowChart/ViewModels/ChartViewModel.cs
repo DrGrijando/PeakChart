@@ -54,7 +54,7 @@
                 if (!string.IsNullOrEmpty(reading.Note))
                     readingsWithNotes.Add(reading);
             }
-
+            
             Entries = entries;
             ReadingsWithNotes = readingsWithNotes;
 

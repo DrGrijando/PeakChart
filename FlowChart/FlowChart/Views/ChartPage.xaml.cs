@@ -40,11 +40,11 @@
         {
             ViewModel.Entries.CollectionChanged += Entries_CollectionChanged;
 
-            chart.WidthRequest = ViewModel.Entries != null ? ViewModel.Entries.Count * 20 : 200;
+            chart.WidthRequest = ViewModel.Entries.Count * 20;
             chart.Chart.Entries = ViewModel.Entries;
 
             await Task.Delay(chart.Chart.AnimationDuration);
-            chart.Chart.IsAnimated = false;           
+            chart.Chart.IsAnimated = false;
         }
 
         private void Entries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

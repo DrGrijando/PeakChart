@@ -4,31 +4,44 @@
                       xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
                       xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
                       xmlns:controls="clr-namespace:FlowChart.Views.Controls"
+                      xmlns:converters="clr-namespace:FlowChart.Converters"
                       xmlns:vm="clr-namespace:FlowChart.ViewModels"
                       x:Class="FlowChart.Views.ChartPage"
                       x:TypeArguments="vm:ChartViewModel">
+
+    <base:BaseContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CollectionEmptyToVisibilityConverter x:Key="collectionEmptyToVisibilityConverter" />
+        </ResourceDictionary>
+    </base:BaseContentPage.Resources>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" 
                      Command="{Binding AddValueCommand}" />
     </ContentPage.ToolbarItems>
 
-    <Grid>
+    <Grid RowSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollView Grid.Row="0" 
+    
+        <ScrollView Grid.Row="0"
                     Orientation="Horizontal"
-                    HeightRequest="300"
-                    VerticalOptions="Center">
-            <charts:ChartView x:Name="chart" />
+                    HorizontalScrollBarVisibility="Never">
+            <charts:ChartView x:Name="chart"
+                              HeightRequest="400"
+                              Margin="0, 10"
+                              VerticalOptions="Center"/>
         </ScrollView>
-        <CollectionView Grid.Row="1"
+        
+        <CollectionView x:Name="notes"  Grid.Row="1"
+                        HeightRequest="180"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionMode="Single"
                         ItemsSource="{Binding ReadingsWithNotes}"
-                        SelectedItem="{Binding SelectedReading}">
+                        SelectedItem="{Binding SelectedReading}"
+                        IsVisible="{Binding ReadingsWithNotes, Converter={StaticResource collectionEmptyToVisibilityConverter}}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
                                    ItemSpacing="6" />
@@ -39,5 +52,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+    
     </Grid>
 </base:BaseContentPage>
