@@ -17,10 +17,10 @@
             chart.Chart = new LineChart()
             {
                 MinValue = 500,
-                MaxValue = 750,
+                MaxValue = 780,
                 PointSize = 30,
-                LineSize = 10,
-                LineMode = LineMode.Straight,
+                LineSize = 8,
+                LineMode = LineMode.Spline,
                 EnableYFadeOutGradient = true,
                 LabelOrientation = Orientation.Vertical,
                 LabelTextSize = 30,
