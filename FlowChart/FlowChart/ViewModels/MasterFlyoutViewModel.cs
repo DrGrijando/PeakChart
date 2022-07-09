@@ -31,13 +31,13 @@
             switch((Section)item.Id)
             {
                 case Section.Home:
-                    await NavigationService.NavigateAsync<HomeViewModel>();
+                    await NavigationService.NavigateToSectionAsync<HomeViewModel>();
                     break;
                 case Section.Chart:
-                    await NavigationService.NavigateAsync<ChartViewModel>();
+                    await NavigationService.NavigateToSectionAsync<ChartViewModel>();
                     break;
                 case Section.Months:
-                    await NavigationService.NavigateAsync<MonthListViewModel>();
+                    await NavigationService.NavigateToSectionAsync<MonthListViewModel>();
                     break;
                 default:
                     break;
