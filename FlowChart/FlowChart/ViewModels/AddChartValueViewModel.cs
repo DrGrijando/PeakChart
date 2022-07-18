@@ -19,7 +19,7 @@
         
         public bool IsNightPeriod 
         {
-            get { return isNightPeriod; }
+            get => isNightPeriod;
             set 
             {
                 isNightPeriod = value;

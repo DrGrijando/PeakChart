@@ -8,10 +8,10 @@
                       x:TypeArguments="vm:MasterFlyoutViewModel"
                       Title="Flyout">
     <StackLayout>
-        <ListView x:Name="MenuItemsListView"
-                  SeparatorVisibility="None"
-                  HasUnevenRows="true"
-                  ItemsSource="{Binding MenuItems}">
+        <ListView SeparatorVisibility="None"
+                  HasUnevenRows="false"
+                  ItemsSource="{Binding MenuItems}"
+                  SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}">
             <ListView.Behaviors>
                 <behaviors:SelectionChangedEventBehavior Command="{Binding MenuItemSelectedCommand}" />
             </ListView.Behaviors>
