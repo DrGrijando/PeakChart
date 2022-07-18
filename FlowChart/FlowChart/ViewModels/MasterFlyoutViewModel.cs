@@ -1,7 +1,7 @@
 ﻿namespace FlowChart.ViewModels
 {
-    using FlowChart.Enums;
-    using FlowChart.Models;
+    using Enums;
+    using Models;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using System.Windows.Input;
@@ -9,10 +9,30 @@
 
     public class MasterFlyoutViewModel : BaseViewModel
     {
-        public ObservableCollection<FlyoutMenuItem> MenuItems { get; set; }
+        private FlyoutMenuItem selectedMenuItem;
+        
+        /// <summary>
+        ///     The menu items of the flyout.
+        /// </summary>
+        public ObservableCollection<FlyoutMenuItem> MenuItems { get; private set; }
 
+        /// <summary>
+        ///     The selected menu item of the flyout.
+        /// </summary>
+        public FlyoutMenuItem SelectedMenuItem
+        {
+            get => selectedMenuItem;
+            set => SetProperty(ref selectedMenuItem, value);
+        }
+        
+        /// <summary>
+        ///     The command to execute when a menu item is selected.
+        /// </summary>
         public ICommand MenuItemSelectedCommand { get; private set; }
 
+        /// <summary>
+        ///     Creates a new instance of the <see cref="MasterFlyoutViewModel"/> class.
+        /// </summary>
         public MasterFlyoutViewModel()
         {
             MenuItems = new ObservableCollection<FlyoutMenuItem>(new[]
@@ -23,12 +43,15 @@
             });
 
 
-            MenuItemSelectedCommand = new Command<FlyoutMenuItem>(async (item) => await NavigateAsync(item));
+            MenuItemSelectedCommand = new Command(async() => await NavigateAsync());
         }
 
-        private async Task NavigateAsync(FlyoutMenuItem item)
+        private async Task NavigateAsync()
         {
-            switch((Section)item.Id)
+            if (SelectedMenuItem == null)
+                return;
+            
+            switch((Section)SelectedMenuItem.Id)
             {
                 case Section.Home:
                     await NavigationService.NavigateToSectionAsync<HomeViewModel>();
@@ -42,6 +65,8 @@
                 default:
                     break;
             }
+
+            SelectedMenuItem = null;
         }
     }
 }

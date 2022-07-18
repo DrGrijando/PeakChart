@@ -30,7 +30,7 @@
         private void AssociatedObject_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (Command != null)
-                Command.Execute(e.SelectedItem);
+                Command.Execute(null);
         }
     }
 }
