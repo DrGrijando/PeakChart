@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowChart.Android", "FlowCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowChart.iOS", "FlowChart.iOS\FlowChart.iOS.csproj", "{8E0C4FFC-ED68-4D01-BDA7-144B63FEDDCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowChart", "FlowChart\FlowChart.csproj", "{A49DAA96-866B-4A17-8021-4295624F618E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlowChart", "FlowChart\FlowChart.csproj", "{A49DAA96-866B-4A17-8021-4295624F618E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE03DF23-F362-42DA-BA4F-D844D94AD120}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
