@@ -3,6 +3,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       xmlns:base="clr-namespace:FlowChart.Views.Base;assembly=FlowChart"
                       xmlns:vm="clr-namespace:FlowChart.ViewModels"
+                      xmlns:effects="clr-namespace:FlowChart.Effects"
                       x:Class="FlowChart.Views.HomePage"
                       x:TypeArguments="vm:HomeViewModel"
                       Title="{Binding Title, Mode=OneTime}">
@@ -13,9 +14,31 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <StackLayout Orientation="Vertical" 
-                 Padding="30,24,30,24" 
+    <StackLayout Orientation="Vertical"
+                 Padding="30,24,30,24"
                  Spacing="10">
+
+        <StackLayout Orientation="Horizontal"
+                     BackgroundColor="#FFD200"
+                     Padding="10">
+            <StackLayout.Effects>
+                <effects:RoundCornersEffect CornerRadius="6" />
+            </StackLayout.Effects>
+        <ContentView BackgroundColor="White"
+                         HeightRequest="40"
+                         WidthRequest="40">
+                <ContentView.Effects>
+                    <effects:RoundCornersEffect CornerRadius="6" />
+                </ContentView.Effects>
+            </ContentView>
+            <Label BackgroundColor="Orange" 
+                   Text="This label has round corners."
+                   Padding="10">
+                <Label.Effects>
+                    <effects:RoundCornersEffect CornerRadius="6" />
+                </Label.Effects>
+            </Label>
+        </StackLayout>
         
         <StackLayout Orientation="Horizontal">
             <Label Text="Show developer functions" />
