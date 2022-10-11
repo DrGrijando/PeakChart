@@ -3,6 +3,7 @@
     using FlowChart.Database.Models;
     using FlowChart.Views;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Xamarin.Forms;
@@ -19,7 +20,7 @@
 
         public ReadingMonth SelectedMonth { get; set; }
 
-        public ICommand MonthSelectedCommand { get; private set; }
+        public ICommand MonthSelectedCommand { get; }
 
         public MonthListViewModel() 
         {
@@ -32,8 +33,8 @@
         /// <returns></returns>
         public override async Task InitializeAsync()
         {
-            List<ReadingMonth> months = await DatabaseService.GetMonthsAsync();
-            Months = months;
+            List<ReadingMonth> storedMonths = await DatabaseService.GetMonthsAsync();
+            Months = new List<ReadingMonth>(storedMonths.OrderBy(month => month.Year).ThenBy(month => month.Month));
 
             await base.InitializeAsync();
         }

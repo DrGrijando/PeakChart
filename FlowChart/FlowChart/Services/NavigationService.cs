@@ -12,7 +12,7 @@
         private MasterPage masterPage => (Application.Current.MainPage as NavigationPage).RootPage as MasterPage;
         private Page currentPage => masterPage.Detail;
 
-        private Page transitionPage = new ContentPage();
+        private readonly Page transitionPage = new ContentPage();
 
         /// <summary>
         ///     The current navigation stack.
@@ -71,6 +71,11 @@
 
             await Task.Delay(200);
             CurrentPage = page;
+        }
+
+        public void CloseSideMenu()
+        {
+            masterPage.IsPresented = false;
         }
     }
 }

@@ -28,5 +28,7 @@
         Task NavigateAsync<T>(object parameter, bool animated = true) where T : BaseViewModel;
 
         Task NavigateToSectionAsync<T>(bool animated = true) where T : BaseViewModel;
+
+        void CloseSideMenu();
     }
 }
