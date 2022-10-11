@@ -53,10 +53,12 @@
                     TextColor="White" />
             
             <Label Text="MONTH" />
-            <Entry Text="{Binding Month}" />
+            <Entry Text="{Binding Month}" 
+                   Keyboard="Numeric" />
             
             <Label Text="YEAR" />
-            <Entry Text="{Binding Year}" />
+            <Entry Text="{Binding Year}"
+                   Keyboard="Numeric" />
             
             <Button Margin="0,10,0,0" Text="INSERT NEW MONTH"
                     Command="{Binding AddMonthsCommand}"
