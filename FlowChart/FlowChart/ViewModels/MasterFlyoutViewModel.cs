@@ -10,6 +10,7 @@
     public class MasterFlyoutViewModel : BaseViewModel
     {
         private FlyoutMenuItem selectedMenuItem;
+        private Section previousSection;
         
         /// <summary>
         ///     The menu items of the flyout.
@@ -50,22 +51,32 @@
         {
             if (SelectedMenuItem == null)
                 return;
-            
-            switch((Section)SelectedMenuItem.Id)
-            {
-                case Section.Home:
-                    await NavigationService.NavigateToSectionAsync<HomeViewModel>();
-                    break;
-                case Section.Chart:
-                    await NavigationService.NavigateToSectionAsync<ChartViewModel>();
-                    break;
-                case Section.Months:
-                    await NavigationService.NavigateToSectionAsync<MonthListViewModel>();
-                    break;
-                default:
-                    break;
-            }
 
+            Section selectedSection = (Section)SelectedMenuItem.Id;
+            if (selectedSection != previousSection)
+            {
+                switch(selectedSection)
+                {
+                    case Section.Home:
+                        await NavigationService.NavigateToSectionAsync<HomeViewModel>();
+                        break;
+                    case Section.Chart:
+                        await NavigationService.NavigateToSectionAsync<ChartViewModel>();
+                        break;
+                    case Section.Months:
+                        await NavigationService.NavigateToSectionAsync<MonthListViewModel>();
+                        break;
+                    default:
+                        break;
+                }
+
+                previousSection = selectedSection;
+            }
+            else
+            {
+                NavigationService.CloseSideMenu();
+            }
+            
             SelectedMenuItem = null;
         }
     }
