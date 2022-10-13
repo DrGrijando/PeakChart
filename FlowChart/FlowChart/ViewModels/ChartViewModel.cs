@@ -48,6 +48,7 @@
             List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
             ObservableCollection<Reading> readingsWithNotes = new ObservableCollection<Reading>();
+            
             foreach (Reading reading in readings)
             {
                 entries.Add(CreateChartEntry(reading));

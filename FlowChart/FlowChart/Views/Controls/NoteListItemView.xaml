@@ -1,25 +1,36 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:converters="clr-namespace:FlowChart.Converters"
+      xmlns:effects="clr-namespace:FlowChart.Effects"
       x:Class="FlowChart.Views.Controls.NoteListItemView"
       HeightRequest="60">
 
-    <Grid.Resources>
+    <ContentView.Resources>
         <ResourceDictionary>
             <converters:DateTimeToFormattedStringConverter x:Key="dateTimeToFormattedStringConverter" />
         </ResourceDictionary>
-    </Grid.Resources>
+    </ContentView.Resources>
 
-    <Grid.RowDefinitions>
-        <RowDefinition Height="20" />
-        <RowDefinition Height="40" />
-    </Grid.RowDefinitions>
+    <Grid Margin="6,0"
+          Padding="6"
+          HorizontalOptions="FillAndExpand"
+          BackgroundColor="Lime">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Effects>
+            <effects:RoundCornersEffect CornerRadius="6" />
+        </Grid.Effects>
 
-    <Label Grid.Row="0" 
-           Text="{Binding Date, Converter={StaticResource dateTimeToFormattedStringConverter}, ConverterParameter=dd/MM/yyyy}" />
+        <Label Grid.Column="0" 
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Text="{Binding Date, Converter={StaticResource dateTimeToFormattedStringConverter}, ConverterParameter=dd/MM}" />
+        
+        <Label Grid.Column="1" 
+               Text="{Binding Note}" />
+    </Grid>
     
-    <Label Grid.Row="1" 
-           Text="{Binding Note}" />
-
-</Grid>
+</ContentView>

@@ -35,7 +35,8 @@
                               VerticalOptions="Center"/>
         </ScrollView>
         
-        <CollectionView x:Name="notes"  Grid.Row="1"
+        <CollectionView x:Name="notes"  
+                        Grid.Row="1"
                         HeightRequest="180"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionMode="Single"
