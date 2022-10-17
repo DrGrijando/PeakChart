@@ -31,8 +31,10 @@
 
         public ICommand SaveValueCommand { get; }
 
-        public AddChartValueViewModel() 
+        public AddChartValueViewModel()
         {
+            IsNightPeriod = Date.TimeOfDay > TimeSpan.FromHours(12);
+            
             SaveValueCommand = new Command(async () => await SaveValueCommandExecute());
         }
 
