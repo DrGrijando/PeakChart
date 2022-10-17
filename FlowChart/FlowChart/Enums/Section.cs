@@ -15,6 +15,11 @@
         /// <summary>
         /// The month list section.
         /// </summary>
-        Months = 2
+        Months = 2,
+
+        /// <summary>
+        /// The settings section.
+        /// </summary>
+        Settings = 3
     }
 }

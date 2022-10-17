@@ -40,7 +40,8 @@
             {
                     new FlyoutMenuItem { Id = (int)Section.Home, Title = "Home" },
                     new FlyoutMenuItem { Id = (int)Section.Chart, Title = "Chart" },
-                    new FlyoutMenuItem { Id = (int)Section.Months, Title = "Months" }
+                    new FlyoutMenuItem { Id = (int)Section.Months, Title = "Months" },
+                    new FlyoutMenuItem { Id = (int)Section.Settings, Title = "Settings" }
             });
 
 
@@ -65,6 +66,9 @@
                         break;
                     case Section.Months:
                         await NavigationService.NavigateToSectionAsync<MonthListViewModel>();
+                        break;
+                    case Section.Settings:
+                        await NavigationService.NavigateToSectionAsync<SettingsViewModel>();
                         break;
                     default:
                         break;

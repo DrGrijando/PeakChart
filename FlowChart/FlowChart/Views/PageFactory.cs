@@ -40,6 +40,11 @@
                     MasterFlyoutViewModel flyoutVm = new MasterFlyoutViewModel();
                     flyoutVm.Initialize();
                     return new MasterPageFlyout(flyoutVm);
+                
+                case nameof(SettingsViewModel):
+                    SettingsViewModel settingsVm = new SettingsViewModel();
+                    settingsVm.Initialize();
+                    return new SettingsPage(settingsVm);
 
                 default:
                     return null;
