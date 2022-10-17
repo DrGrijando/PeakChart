@@ -146,7 +146,9 @@
                 if (i > 0)
                 {
                     r.IsNightPeriod = !readings[i - 1].IsNightPeriod;
-                    r.Note = string.IsNullOrEmpty(readings[i-1].Note) ? "Test note" : null;
+                    r.Note = string.IsNullOrEmpty(readings[i-1].Note) ? 
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod ut elit in auctor. Praesent convallis cursus ligula, sit amet accumsan nunc lobortis non." 
+                        : null;
                 }
                 readings.Add(r);
                 await db.InsertAsync(r);

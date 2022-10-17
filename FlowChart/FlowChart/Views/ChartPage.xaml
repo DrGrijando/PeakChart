@@ -23,6 +23,7 @@
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
     
@@ -35,8 +36,11 @@
                               VerticalOptions="Center"/>
         </ScrollView>
         
+        <BoxView Grid.Row="1"
+                 BackgroundColor="Black" />
+        
         <CollectionView x:Name="notes"  
-                        Grid.Row="1"
+                        Grid.Row="2"
                         HeightRequest="180"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionMode="Single"
@@ -47,12 +51,24 @@
                 <LinearItemsLayout Orientation="Vertical"
                                    ItemSpacing="6" />
             </CollectionView.ItemsLayout>
+            <CollectionView.Header>
+                <BoxView HeightRequest="0" />
+            </CollectionView.Header>
+            <CollectionView.Footer>
+                <BoxView HeightRequest="10" />
+            </CollectionView.Footer>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <controls:NoteListItemView />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    
+        
+        <BoxView Grid.Row="2"
+                 HeightRequest="1"
+                 BackgroundColor="Black"
+                 Opacity="0.3"
+                 VerticalOptions="Start" />
+        
     </Grid>
 </base:BaseContentPage>

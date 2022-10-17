@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      xmlns:converters="clr-namespace:FlowChart.Converters"
-      xmlns:effects="clr-namespace:FlowChart.Effects"
-      x:Class="FlowChart.Views.Controls.NoteListItemView"
-      HeightRequest="60">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:FlowChart.Converters"
+             x:Class="FlowChart.Views.Controls.NoteListItemView"
+             HeightRequest="60">
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -12,25 +11,36 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <Grid Margin="6,0"
-          Padding="6"
-          HorizontalOptions="FillAndExpand"
-          BackgroundColor="Lime">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.Effects>
-            <effects:RoundCornersEffect CornerRadius="6" />
-        </Grid.Effects>
-
-        <Label Grid.Column="0" 
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               Text="{Binding Date, Converter={StaticResource dateTimeToFormattedStringConverter}, ConverterParameter=dd/MM}" />
+    <Frame Margin="6,0"
+           Padding="0"
+           CornerRadius="6"
+           BorderColor="Black"
+           HasShadow="False">
+    
+        <Grid ColumnSpacing="0"
+              HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Column="0" 
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Text="{Binding Date, Converter={StaticResource dateTimeToFormattedStringConverter}, ConverterParameter=dd/MM}" />
+            
+            <BoxView Grid.Column="1"
+                     BackgroundColor="Black"/>
+            
+            <Label Grid.Column="2"
+                   Margin="6,0"
+                   MaxLines="2"
+                   LineBreakMode="TailTruncation"
+                   VerticalTextAlignment="Center"
+                   Text="{Binding Note}" />
+        </Grid>
         
-        <Label Grid.Column="1" 
-               Text="{Binding Note}" />
-    </Grid>
+    </Frame>
     
 </ContentView>
