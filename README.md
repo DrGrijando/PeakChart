@@ -4,7 +4,7 @@ Simple app for registration and visualization of daily peak expiratory flow (PEF
 # License
 MIT
 
-Copyright (c) 2022 Rubén Gómez Pérez
+Copyright (c) 2024 Rubén Gómez Pérez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
