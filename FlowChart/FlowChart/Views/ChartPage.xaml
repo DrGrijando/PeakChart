@@ -41,7 +41,7 @@
         
         <CollectionView x:Name="notes"  
                         Grid.Row="2"
-                        HeightRequest="180"
+                        HeightRequest="240"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionMode="Single"
                         ItemsSource="{Binding ReadingsWithNotes}"

@@ -13,7 +13,7 @@
     {
         private readonly SQLiteAsyncConnection db;
 
-        public ReadingMonth CurrentMonth { get; private set; }
+        private ReadingMonth CurrentMonth { get; set; }
 
         public DatabaseService()
         {
@@ -44,6 +44,11 @@
             AsyncTableQuery<ReadingMonth> query = db.Table<ReadingMonth>();
             List<ReadingMonth> months = await query.ToListAsync();
             return months;
+        }
+
+        public async Task<List<Reading>> GetCurrentMonthAsync()
+        {
+            return await GetMonthAsync(CurrentMonth.Id);
         }
 
         public async Task<List<Reading>> GetMonthAsync(int monthId)

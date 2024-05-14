@@ -12,7 +12,7 @@
 
     public class ChartViewModel : BaseViewModel
     {
-        private readonly int monthId;
+        private readonly int monthId = -1;
 
         private ObservableCollection<Reading> readingsWithNotes;
         private ObservableCollection<ChartEntry> entries;
@@ -33,8 +33,8 @@
 
         public ChartViewModel(object parameter)
         {
-            if (parameter is int monthId)
-                this.monthId = monthId;
+            if (parameter is int id)
+                monthId = id;
 
             AddValueCommand = new Command(async () => await AddValueCommandExecute());
         }
@@ -45,7 +45,12 @@
         /// <returns></returns>
         public override async Task InitializeAsync()
         {            
-            List<Reading> readings = await DatabaseService.GetMonthAsync(monthId);
+            List<Reading> readings;
+            if (monthId != -1)
+                readings = await DatabaseService.GetMonthAsync(monthId);
+            else
+                readings = await DatabaseService.GetCurrentMonthAsync();
+
             ObservableCollection<ChartEntry> entries = new ObservableCollection<ChartEntry>();
             ObservableCollection<Reading> readingsWithNotes = new ObservableCollection<Reading>();
             

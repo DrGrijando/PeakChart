@@ -8,11 +8,6 @@
     public interface IDatabaseService
     {
         /// <summary>
-        /// Gets the current month information.
-        /// </summary>
-        ReadingMonth CurrentMonth { get; }
-
-        /// <summary>
         /// Initialize service and database.
         /// </summary>
         /// <returns></returns>
@@ -23,6 +18,12 @@
         /// </summary>
         /// <returns></returns>
         Task<List<ReadingMonth>> GetMonthsAsync();
+
+        /// <summary>
+        /// Obtain the readings for the current month.
+        /// </summary>
+        /// <returns>The readings for the given month.</returns>
+        Task<List<Reading>> GetCurrentMonthAsync();
 
         /// <summary>
         /// Obtain the readings for a specific month.
